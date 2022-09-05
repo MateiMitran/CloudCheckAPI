@@ -1,0 +1,16 @@
+.leftSide {
+  margin-left: 50px;
+  margin-top: 100px;
+  float: left;
+}
+
+.rightSide {
+  margin-right: 44%;
+  float: right;
+  margin-top: 90px;
+}
+
+.sendButton {
+  margin-left: 20px;
+  margin-top: 10px;
+}
