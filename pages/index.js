@@ -14,11 +14,11 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React, { useRef, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import styles from "../styles/styles.module.css";
 import ApiService from "./api.service";
 
 export default function Home() {
-  
   const [temp, setTemp] = useState("");
   const [cardLabel, setCardLabel] = useState("");
   const [city, setCity] = useState("");
@@ -30,8 +30,16 @@ export default function Home() {
   const [expanded, setExpanded] = useState(false);
   const [pressed, setPressed] = useState(false);
 
+  // ref to TextField
   const cityName = useRef();
 
+  const { handleSubmit, control } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  //Expand more Card
   const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -47,31 +55,45 @@ export default function Home() {
     setExpanded(!expanded);
   }
 
+  // sends post request and validates
   function sendRequestButton() {
-    ApiService.sendRequest(city).then((response) => {
-      SetDataFromResponse();
-      console.log(temp);
-      function SetDataFromResponse() {
-        setTemp(response.data.current.temperature);
-        setCountry(response.data.location.country);
-        setRegion(response.data.location.region);
-        setLatitude(response.data.location.lat);
-        setLongitude(response.data.location.lon);
-        setVisibility(response.data.current.visibility);
-        setCardLabel(city);
-        setPressed(true);
-      }
-    });
+    if (
+      cityName.current.value !== "" &&
+      cityName.current.value.length > 2 &&
+      /[0-9]/.test(cityName.current.value) == false
+    ) {
+      ApiService.sendRequest(city).then((response) => {
+        if (JSON.stringify(response.data).includes("false")) {
+          alert("Please enter a valid city");
+        } else {
+          SetDataFromResponse();
+          function SetDataFromResponse() {
+            setTemp(response.data.current.temperature);
+            setCountry(response.data.location.country);
+            setRegion(response.data.location.region);
+            setLatitude(response.data.location.lat);
+            setLongitude(response.data.location.lon);
+            setVisibility(response.data.current.visibility);
+            setCardLabel(city);
+            setPressed(true);
+          }
+        }
+      });
+    } else {
+      alert("Please enter a valid city!");
+      setPressed(false);
+    }
   }
   function handleTextChange(e) {
     setCity(e.target.value);
   }
+
   function changePressed() {
     if (pressed == false) {
       alert("No city to reset!");
     } else {
-    setPressed(!pressed);
-    cityName.current.value = "";
+      setPressed(!pressed);
+      cityName.current.value = "";
     }
   }
   return (
@@ -84,45 +106,61 @@ export default function Home() {
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{ mr: 2 }}
+              sx={{ mr: 1 }}
             >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Weather API
+              Weather
             </Typography>
-            <WbSunnyIcon sx={{ mr: "89%" }}> </WbSunnyIcon>
+            <WbSunnyIcon sx={{ mr: "90%", ml: "10px" }}> </WbSunnyIcon>
           </Toolbar>
         </AppBar>
       </Box>
 
       <div className={styles.leftSide}>
-        <TextField
-          label="City"
-          onChange={handleTextChange}
-          variant="outlined"
-          sx={{ input: { color: "white" } }}
-          focused
-          inputRef={cityName}
-        ></TextField>
-        <Button
-          onClick={sendRequestButton}
-          variant="contained"
-          className={styles.sendButton}
-        >
-          Send
-        </Button>
-        <Button
-          onClick={changePressed}
-          variant="contained"
-          className={styles.sendButton}
-        >
-          Reset
-        </Button>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="city"
+            control={control}
+            defaultValue=""
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                label="City"
+                onChange={handleTextChange}
+                variant="outlined"
+                className="cityField"
+                sx={{ input: { color: "white" } }}
+                focused
+                inputRef={cityName}
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+            rules={{ required: "Field required" }}
+          />
+          <Button
+            onClick={sendRequestButton}
+            variant="contained"
+            className="send_Button"
+            type="submit"
+          >
+            Send
+          </Button>
+          {pressed && (
+            <Button
+              onClick={changePressed}
+              variant="contained"
+              className="reset_Button"
+            >
+              Reset
+            </Button>
+          )}
+        </form>
       </div>
       <div className={styles.rightSide}>
         {pressed && (
-          <Card sx={{ minWidth: 275, maxWidth: 500 }} visible={false}>
+          <Card sx={{ minWidth: 275, maxWidth: 500 }} visible={false} >
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -131,7 +169,7 @@ export default function Home() {
               >
                 Weather in
               </Typography>
-              <Typography variant="h5" component="div">
+              <Typography variant="h5" component="div" className="cardLabel">
                 <span style={{ fontWeight: "bold" }}> {cardLabel} </span>
               </Typography>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
