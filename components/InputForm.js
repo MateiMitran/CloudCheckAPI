@@ -4,7 +4,6 @@ import { Controller } from "react-hook-form";
 import styles from "../styles/styles.module.css";
 
 const InputForm = (props) => {
-
   return (
     <div>
       <Controller
@@ -13,14 +12,14 @@ const InputForm = (props) => {
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
-            label="City"
+            label="MermaidJS"
             onChange={props.onTextChange}
             variant="outlined"
             className="cityField"
-            sx={{ input: { color: "white" } }}
+            inputProps={{ style: { color: "white" } }}
             focused
-            inputRef={props.cityNameProp}
             data-cy="input_Textfield"
+            multiline
           />
         )}
         rules={{ required: "Field required" }}
