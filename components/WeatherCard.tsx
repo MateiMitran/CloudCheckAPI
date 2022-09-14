@@ -10,7 +10,7 @@ export interface WeatherCardProps {
 
 const WeatherCard = ({ cardLabel, chart }: WeatherCardProps) => {
   return (
-    <Card sx={{ minWidth: 275, maxWidth: 500 }} visible={false}>
+    <Card sx={{ minWidth: 275, maxWidth: 500 }}>
       <CardContent>
         <Typography>
           <MermaidViewer chart={chart}></MermaidViewer>
