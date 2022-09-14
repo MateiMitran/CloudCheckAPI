@@ -11,6 +11,9 @@
 }
 
 .inputButton {
-  margin-left: 20px;
-  margin-top: 10px;
+  display: inline-block
+}
+
+.buttonWrapper {
+  
 }

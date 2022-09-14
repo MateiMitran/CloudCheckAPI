@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
+import WeatherCard from "../components/WeatherCard";
 import styles from "../styles/styles.module.css";
-import MermaidViewer from "./mermaid.service";
 
 export default function Home() {
-  const [expanded, setExpanded] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [snippet, setSnippet] = useState("");
   const [code, setCode] = useState("");
@@ -15,7 +14,7 @@ export default function Home() {
     setPressed(true);
     setCode(snippet);
   }
-  function handleTextChange(e) {
+  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
     setSnippet(e.target.value);
   }
 
@@ -29,9 +28,7 @@ export default function Home() {
     console.log(data);
   };
 
-  function handleExpandClick(e) {
-    setExpanded(!expanded);
-  }
+ 
 
   return (
     <div>
@@ -48,7 +45,12 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        {pressed && <MermaidViewer chart={code}></MermaidViewer>}
+        {pressed && (
+        <WeatherCard
+        cardLabel="Label"
+        chart={code}
+        />
+        )}
       </div>
     </div>
   );

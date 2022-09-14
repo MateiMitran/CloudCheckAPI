@@ -1,22 +1,29 @@
 import { Button, TextField } from "@mui/material";
 import React from "react";
-import { Controller } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import styles from "../styles/styles.module.css";
+import { Control } from "react-hook-form";
 
-const InputForm = (props) => {
+export interface InputFormProps {
+    control: Control<FieldValues,any>,
+    onTextChange(e: React.ChangeEvent<HTMLInputElement>): void,
+    sendRequestButtonProp(): void,
+    pressed: boolean,
+    changePressed(): void
+}
+const InputForm = ({control, onTextChange, sendRequestButtonProp,pressed, changePressed}: InputFormProps) => {
   return (
     <div>
       <Controller
         name="city"
-        control={props.control}
+        control={control}
         defaultValue=""
         render={({ field: { onChange, value }, fieldState: { error } }) => (
           <TextField
             label="MermaidJS"
-            onChange={props.onTextChange}
+            onChange={onTextChange}
             variant="outlined"
             className="cityField"
-            inputProps={{ style: { color: "white" } }}
             focused
             data-cy="input_Textfield"
             multiline
@@ -24,25 +31,29 @@ const InputForm = (props) => {
         )}
         rules={{ required: "Field required" }}
       />
+      <div className={styles.buttonWrapper}>
       <Button
-        onClick={props.sendRequestButtonProp}
+        onClick={sendRequestButtonProp}
         variant="contained"
         className={styles.inputButton}
         data-cy="send_Button"
+        sx={{mt:"10px"}}
         type="submit"
       >
         Send
       </Button>
-      {props.pressed && (
+      {pressed && (
         <Button
-          onClick={props.changePressed}
+          onClick={changePressed}
           variant="contained"
           className={styles.inputButton}
           data-cy="reset_Button"
+          sx={{mt:"10px",ml:"60px"}}
         >
           Reset
         </Button>
       )}
+      </div>
     </div>
   );
 };
