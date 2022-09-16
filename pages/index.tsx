@@ -4,6 +4,7 @@ import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
 import WeatherCard from "../components/WeatherCard";
 import styles from "../styles/styles.module.css";
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const [pressed, setPressed] = useState(false);

@@ -8,8 +8,7 @@ export interface MermaidViewerProps {
 export default function MermaidViewer(props: MermaidViewerProps) {
     useEffect(() => mermaid.contentLoaded(), []);
     mermaid.initialize({
-        startOnLoad: true,
-        useMaxWidth: true,
+        startOnLoad: true
     });
     return <div className="mermaid">{props.chart}</div>;
 }
