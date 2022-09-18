@@ -1,5 +1,4 @@
-import SendIcon from "@mui/icons-material";
-import { Button, IconButton, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import React from "react";
@@ -39,13 +38,20 @@ const InputForm = ({
                 sx={{ width: "500px" }}
                 multiline
                 fullWidth={true}
+                defaultValue="```mermaid\r\n
+                flowchart TD\n
+                    A[Start] --> B{Is it?}\n
+                    B -->|Yes| C[OK]\n
+                    C --> D[Rethink]\n
+                    D --> B\n
+                    B ---->|No| E[End]\n
+                ```"
                 // InputProps={{ style: { color: "white" } }}
               />
             )}
             rules={{ required: "Field required" }}
           />
           <Button
-            startIcon={<SendIcon/>}
             onClick={sendRequestButtonProp}
             variant="contained"
             className={styles.inputButton1}

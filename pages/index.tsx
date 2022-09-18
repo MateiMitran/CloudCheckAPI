@@ -4,7 +4,6 @@ import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
 import WeatherCard from "../components/WeatherCard";
 import styles from "../styles/styles.module.css";
-import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   const [pressed, setPressed] = useState(false);
@@ -29,8 +28,6 @@ export default function Home() {
     console.log(data);
   };
 
- 
-
   return (
     <div>
       <Navbar />
@@ -46,12 +43,7 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        {pressed && (
-        <WeatherCard
-        cardLabel="Label"
-        chart={code}
-        />
-        )}
+        {pressed && <WeatherCard cardLabel="Label" chart={code} />}
       </div>
     </div>
   );

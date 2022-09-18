@@ -1,14 +1,28 @@
 import mermaid from "mermaid";
-import React from "react";
 import { useEffect } from "react";
 
 export interface MermaidViewerProps {
-    chart?: string
+  chart: string;
 }
+
 export default function MermaidViewer(props: MermaidViewerProps) {
-    useEffect(() => mermaid.contentLoaded(), []);
-    mermaid.initialize({
-        startOnLoad: true
-    });
-    return <div className="mermaid">{props.chart}</div>;
+  useEffect(() => mermaid.contentLoaded(), []);
+  mermaid.initialize({
+    startOnLoad: true,
+  });
+  let hello: string;
+  if (props.chart.includes("```mermaid")) {
+    hello = props.chart.substring(10).slice(0, -3);
+  } else {
+    hello = "Not MermaidJS syntax.";
+  }
+  try {
+    return mermaid.parse(hello) ? (
+      <div className="mermaid">{hello}</div>
+    ) : (
+      <p>Not MermaidJS syntax!</p>
+    );
+  } catch (e) {
+    return <p>Incorrect MermaidJS syntax!</p>;
+  }
 }
