@@ -1,31 +1,32 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import CommonCard from "../components/CommonCard";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
-import WeatherCard from "../components/WeatherCard";
 import styles from "../styles/styles.module.css";
 
+export interface IFormInput {
+  code: string;
+}
+
 export default function Home() {
-  const [pressed, setPressed] = useState(false);
-  const [snippet, setSnippet] = useState("");
   const [code, setCode] = useState("");
 
-  function sendRequestButton() {
-    setPressed(true);
-    setCode(snippet);
-  }
-  function handleTextChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setSnippet(e.target.value);
+  const { handleSubmit, control, watch, reset } = useForm<IFormInput>();
+
+  const [cardVisible, setCardVisible] = useState(Boolean(watch("code")));
+
+  function changeCardVisible() {
+    setCardVisible(!cardVisible);
+    reset({
+      code: "",
+    });
   }
 
-  function changePressed() {
-    setPressed(!pressed);
-  }
-
-  const { handleSubmit, control } = useForm();
-
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
     console.log(data);
+    setCode(data.code);
+    setCardVisible(!cardVisible);
   };
 
   return (
@@ -35,15 +36,13 @@ export default function Home() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputForm
             control={control}
-            onTextChange={handleTextChange}
-            sendRequestButtonProp={sendRequestButton}
-            changePressed={changePressed}
-            pressed={pressed}
+            changeCardVisible={changeCardVisible}
+            commonCardVisible={cardVisible}
           />
         </form>
       </div>
       <div className={styles.rightSide}>
-        {pressed && <WeatherCard cardLabel="Label" chart={code} />}
+        {cardVisible && <CommonCard chart={code} />}
       </div>
     </div>
   );

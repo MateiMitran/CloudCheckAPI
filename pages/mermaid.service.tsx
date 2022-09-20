@@ -11,7 +11,7 @@ export default function MermaidViewer(props: MermaidViewerProps) {
     startOnLoad: true,
   });
   let hello: string;
-  if (props.chart.includes("```mermaid")) {
+  if (/(```mermaid)/.exec(props.chart)) {
     hello = props.chart.substring(10).slice(0, -3);
   } else {
     hello = "Not MermaidJS syntax.";

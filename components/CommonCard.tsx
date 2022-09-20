@@ -3,12 +3,11 @@ import CardContent from "@mui/material/CardContent";
 import MermaidViewer from "pages/mermaid.service";
 import ReactMarkdown from "react-markdown";
 
-export interface WeatherCardProps {
-  cardLabel: string;
+export interface CommonCardProps {
   chart: string; 
 }
 
-const WeatherCard = ({ cardLabel, chart }: WeatherCardProps) => {
+const CommonCard = ({ chart }: CommonCardProps) => {
   return (
     <Card sx={{ minWidth: 275, maxWidth: 400 }}>
       <CardContent> 
@@ -31,4 +30,4 @@ const WeatherCard = ({ cardLabel, chart }: WeatherCardProps) => {
     </Card>
   );
 };
-export default WeatherCard;
+export default CommonCard;

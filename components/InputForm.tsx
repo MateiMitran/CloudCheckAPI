@@ -1,78 +1,54 @@
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import React from "react";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { IFormInput } from "pages";
+import { Control, UseFormRegister } from "react-hook-form";
 import styles from "../styles/styles.module.css";
+import { TextFieldController } from "./TextFieldController";
 
 export interface InputFormProps {
-  control: Control<FieldValues, any>;
-  onTextChange(e: React.ChangeEvent<HTMLInputElement>): void;
-  sendRequestButtonProp(): void;
-  pressed: boolean;
-  changePressed(): void;
+  control: Control<IFormInput, any>;
+  commonCardVisible: boolean;
+  changeCardVisible(): void;
 }
 const InputForm = ({
   control,
-  onTextChange,
-  sendRequestButtonProp,
-  pressed,
-  changePressed,
+  commonCardVisible,
+  changeCardVisible,
 }: InputFormProps) => {
   return (
-    <div className={styles.box}>
-      <Card sx={{ minWidth: 200, maxWidth: 540 }}>
-        <CardContent>
-          <Controller
-            name="city"
-            control={control}
-            defaultValue=""
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                label="MermaidJS"
-                onChange={onTextChange}
-                variant="outlined"
-                className="cityField"
-                focused
-                data-cy="input_Textfield"
-                sx={{ width: "500px" }}
-                multiline
-                fullWidth={true}
-                defaultValue="```mermaid\r\n
-                flowchart TD\n
-                    A[Start] --> B{Is it?}\n
-                    B -->|Yes| C[OK]\n
-                    C --> D[Rethink]\n
-                    D --> B\n
-                    B ---->|No| E[End]\n
-                ```"
-                // InputProps={{ style: { color: "white" } }}
-              />
-            )}
-            rules={{ required: "Field required" }}
-          />
-          <Button
-            onClick={sendRequestButtonProp}
-            variant="contained"
-            className={styles.inputButton1}
-            data-cy="send_Button"
-            type="submit"
-          >
-            Send
-          </Button>
-          {pressed && (
+    <>
+      <div className={styles.box}>
+        <Card sx={{ minWidth: 200, maxWidth: 540 }}>
+          <CardContent>
+            <TextFieldController
+              control={control}
+              name="code"
+              label="MermaidJS"
+              variant="outlined"
+            />
             <Button
-              onClick={changePressed}
-              variant="text"
-              className={styles.inputButton2}
-              data-cy="reset_Button"
+              variant="contained"
+              className={styles.inputButton1}
+              data-cy="send_Button"
+              type="submit"
             >
-              Reset
+              Send
             </Button>
-          )}
-        </CardContent>
-      </Card>
-    </div>
+            {commonCardVisible && (
+              <Button
+                onClick={changeCardVisible}
+                variant="text"
+                className={styles.inputButton2}
+                data-cy="reset_Button"
+              >
+                Reset
+              </Button>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </>
   );
 };
 export default InputForm;
