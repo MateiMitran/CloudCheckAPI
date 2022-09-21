@@ -12,14 +12,18 @@ export interface IFormInput {
 export default function Home() {
   const [code, setCode] = useState("");
 
-  const { handleSubmit, control, watch, reset } = useForm<IFormInput>();
+  const defaultValues =  {code: "```mermaid \n flowchart LR \n A o--o B \n B <--> C \n C x--x D \n ```"};
 
-  const [cardVisible, setCardVisible] = useState(Boolean(watch("code")));
+  const { handleSubmit, control, watch, reset } = useForm<IFormInput>(
+    {defaultValues}
+  );
+  
+  const [cardVisible, setCardVisible] = useState(watch("code")!==defaultValues.code);
 
   function changeCardVisible() {
     setCardVisible(!cardVisible);
     reset({
-      code: "",
+      code: defaultValues.code || ""
     });
   }
 

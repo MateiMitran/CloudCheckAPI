@@ -39,7 +39,7 @@ export function TextFieldController<
           sx={{ width: "500px" }}
           multiline
           fullWidth={true}
-          value={value || "```mermaid \n flowchart LR \n A o--o B \n B <--> C \n C x--x D \n ```"}
+          value={value || ""}
         />
       )}
       rules={{ required: "Field required" }}
