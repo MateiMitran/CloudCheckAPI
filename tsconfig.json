@@ -20,5 +20,6 @@
     "strictNullChecks": true
   },
   "exclude": ["node_modules", "cypress"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/Mermaid/detectType.js", "Mermaid/FlowParser.js"],
+  
 }
