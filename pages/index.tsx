@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import CommonCard from "../components/CommonCard";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
 import styles from "../styles/styles.module.css";
-import ParseService from "./ParseService";
+import ParsedChart from "./ParsedChart";
 
 export interface IFormInput {
   code: string;
@@ -36,7 +35,7 @@ export default function Home() {
     console.log(data);
     setCode(data.code);
     setCardVisible(!cardVisible);
-    console.log(ParseService.parseCalculator("4+5"));
+
   };
 
   return (
@@ -52,8 +51,9 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        {cardVisible && <CommonCard chart={code} />}
+        {cardVisible && <ParsedChart></ParsedChart>}
       </div>
     </div>
   );
 }
+//        {cardVisible && <CommonCard chart={code} />}
