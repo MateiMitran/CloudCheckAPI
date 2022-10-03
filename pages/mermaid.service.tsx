@@ -1,5 +1,6 @@
 import mermaid from "mermaid";
 import { useEffect } from "react";
+import axios from "axios";
 
 export interface MermaidViewerProps {
   chart: string;
@@ -16,6 +17,11 @@ export default function MermaidViewer(props: MermaidViewerProps) {
   } else {
     hello = "Not MermaidJS syntax.";
   }
+  axios
+    .post("http://localhost:8080/parse", { input: hello})
+    .then((res) => {
+      console.log(res.data);
+    });
   try {
     return mermaid.parse(hello) ? (
       <div className="mermaid">{hello}</div>

@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import Chart from "./Chart";
 
 const inputFlow = `
   flowchart TB
@@ -60,34 +61,21 @@ PERSON {
     int age
 }`;
 
-class ParseService {
-  static parse(code: string): Promise<AxiosResponse> {
-    return axios.post("http://localhost:8080/parse", { input: code });
-  }
-}
-//export interface ParsedChartProps {
-// chart: string;
-// }
+export default async function ParsedChart() {
+  const response = await axios({
+    url: "http://localhost:8080/parse",
+    method: "POST",
+    data: {
+      input: inputER
+    }
+  })
 
-export default function ParsedChart() {
-  let parsedChart: Array<string> = [];
-  ParseService.parse(inputFlow).then((res) => {
-    parsedChart = res.data;
-    console.log(res.data[0]);
-    res.data.forEach((line: string) => {
-      parsedChart.push(line);
-    });
-    console.log(parsedChart);
-  });
-  try {
-    return (
-      <>
-        {parsedChart.map((line: string) => (
-          <p>{line}</p>
-        ))}
-      </>
-    );
-  } catch (error) {
-    return <p>Error!</p>;
-  }
+  return response.data
+ 
+}
+
+
+const parsedChart = async (input: string) => {
+  input = inputER;
+
 }

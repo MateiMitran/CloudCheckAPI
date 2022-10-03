@@ -1,9 +1,9 @@
+import CommonCard from "components/CommonCard";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
 import styles from "../styles/styles.module.css";
-import ParsedChart from "./ParsedChart";
 
 export interface IFormInput {
   code: string;
@@ -35,7 +35,6 @@ export default function Home() {
     console.log(data);
     setCode(data.code);
     setCardVisible(!cardVisible);
-
   };
 
   return (
@@ -51,9 +50,8 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        {cardVisible && <ParsedChart></ParsedChart>}
+        <>{cardVisible && <CommonCard chart={code} />}</>
       </div>
     </div>
   );
 }
-//        {cardVisible && <CommonCard chart={code} />}
