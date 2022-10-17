@@ -11,24 +11,14 @@ export default function MermaidViewer(props: MermaidViewerProps) {
   mermaid.initialize({
     startOnLoad: true,
   });
-  let hello: string;
-  if (/(```mermaid)/.exec(props.chart)) {
-    hello = props.chart.substring(10).slice(0, -3);
-  } else {
-    hello = "Not MermaidJS syntax.";
-  }
-  axios
-    .post("http://localhost:8080/parse", { input: hello})
+  
+  console.log(props.chart);
+  let data = JSON.stringify({input: props.chart.trim()});
+    axios
+    .post("http://localhost:8080/parse", data, {headers:{"Content-Type" : "application/json"}})
     .then((res) => {
       console.log(res.data);
-    });
-  try {
-    return mermaid.parse(hello) ? (
-      <div className="mermaid">{hello}</div>
-    ) : (
-      <p>Not MermaidJS syntax!</p>
-    );
-  } catch (e) {
-    return <p>Incorrect MermaidJS syntax!</p>;
-  }
+    }).catch();
+    return <div className="mermaid">{props.chart}</div>
+  
 }

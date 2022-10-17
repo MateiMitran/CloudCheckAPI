@@ -32,7 +32,6 @@ export default function Home() {
   }
 
   const onSubmit: SubmitHandler<IFormInput> = (data: IFormInput) => {
-    console.log(data);
     setCode(data.code);
     setCardVisible(!cardVisible);
   };

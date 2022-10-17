@@ -32,6 +32,7 @@ const InputForm = ({
               className={styles.inputButton1}
               data-cy="send_Button"
               type="submit"
+              sx={{ mt: "20px" }}
             >
               Send
             </Button>
@@ -41,6 +42,7 @@ const InputForm = ({
                 variant="text"
                 className={styles.inputButton2}
                 data-cy="reset_Button"
+                sx={{ mt: "20px", ml: "360px" }}
               >
                 Reset
               </Button>
