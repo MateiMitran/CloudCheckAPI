@@ -1,4 +1,4 @@
-import CommonCard from "components/CommonCard";
+import MermaidRenderer from "components/MermaidRenderer";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputForm from "../components/InputForm";
@@ -49,7 +49,7 @@ export default function Home() {
         </form>
       </div>
       <div className={styles.rightSide}>
-        <>{cardVisible && <CommonCard chart={code} />}</>
+        <>{cardVisible && <MermaidRenderer chart={code} />}</>
       </div>
     </div>
   );
