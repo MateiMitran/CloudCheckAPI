@@ -13,7 +13,7 @@ export default function Home() {
   const [code, setCode] = useState("");
 
   const defaultValues = {
-    code: "```mermaid \n flowchart LR \n A o--o B \n B <--> C \n C x--x D \n ```",
+    code: "```mermaid \n classDiagram \n classA <|-- classB \n classC *-- classD \n classE o-- classF \n classG <-- classH \n classI -- classJ \n classK <.. classL \n classM <|.. classN \n classO .. classP \n```",
   };
 
   const { handleSubmit, control, watch, reset } = useForm<IFormInput>({
