@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "lib": ["dom", "dom.iterable", "esnext", "es6"],
+    "target": "esnext",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -17,9 +16,19 @@
     "incremental": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "lib": [
+      "ES6",
+      "DOM"
+    ]
   },
-  "exclude": ["node_modules", "cypress"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/Mermaid/detectType.js", "Mermaid/FlowParser.js"],
-  
+  "exclude": [
+    "node_modules",
+    "cypress"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+  ]
 }

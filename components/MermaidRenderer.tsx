@@ -1,7 +1,8 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import MermaidViewer from "pages/mermaid.service";
+import React from "react";
 import ReactMarkdown from "react-markdown";
+import MermaidViewer from "../pages/mermaid.service";
 
 export interface MermaidRendererProps {
   chart: string;
@@ -22,7 +23,7 @@ const MermaidRenderer = ({ chart }: MermaidRendererProps) => {
               mermaidSyntax = chart.substring(10).slice(0, -3);
 
               return match ? (
-                <MermaidViewer chart={mermaidSyntax } />
+                <MermaidViewer chart={mermaidSyntax} />
               ) : (
                 <p>Not MermaidJS syntax!</p>
               );

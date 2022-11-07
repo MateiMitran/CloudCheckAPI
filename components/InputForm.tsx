@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import { IFormInput } from "pages";
+import React from "react";
 import { Control } from "react-hook-form";
+import { IFormInput } from "../pages";
 import styles from "../styles/styles.module.css";
 import { TextFieldController } from "./TextFieldController";
 

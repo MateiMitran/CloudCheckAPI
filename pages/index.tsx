@@ -1,5 +1,5 @@
-import MermaidRenderer from "components/MermaidRenderer";
-import { useState } from "react";
+import MermaidRenderer from "../components/MermaidRenderer";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";

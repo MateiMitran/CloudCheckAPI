@@ -1,6 +1,6 @@
 import axios from "axios";
 import mermaid from "mermaid";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 export interface MermaidViewerProps {
   chart: string;
