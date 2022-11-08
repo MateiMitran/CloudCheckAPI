@@ -19,7 +19,7 @@
     "fs": "^0.0.1-security",
     "jison": "^0.4.18",
     "knex": "^2.3.0",
-    "mermaid": "^8.13.3",
+    "mermaid": "^9.2.0",
     "next": "12.2.5",
     "next-transpile-modules": "^10.0.0",
     "react": "18.2.0",

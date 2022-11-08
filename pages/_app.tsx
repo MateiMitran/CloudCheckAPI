@@ -1,10 +1,9 @@
 import CssBaseline from '@mui/material/CssBaseline';
 import type { AppProps } from "next/app";
 import "../styles/pageStyle.css";
-import "../styles/styles.module.css";
 import Head from 'next/head';
 import { ThemeProvider } from '@mui/material/styles';
-import { theme } from 'styles/theme/theme';
+import { theme } from '../styles/theme/theme';
 import React from "react";
 
 export default function MyApp({ Component, pageProps }: AppProps) {

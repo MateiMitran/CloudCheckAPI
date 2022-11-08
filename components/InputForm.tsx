@@ -1,10 +1,8 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import React from "react";
+import { IFormInput } from "pages";
 import { Control } from "react-hook-form";
-import { IFormInput } from "../pages";
-import styles from "../styles/styles.module.css";
 import { TextFieldController } from "./TextFieldController";
 
 export interface InputFormProps {
@@ -19,38 +17,39 @@ const InputForm = ({
 }: InputFormProps) => {
   return (
     <>
-      <div className={styles.box}>
-        <Card sx={{ minWidth: 200, maxWidth: 540 }}>
-          <CardContent>
-            <TextFieldController
-              control={control}
-              name="code"
-              label="MermaidJS"
-              variant="outlined"
-            />
-            <Button
-              variant="contained"
-              className={styles.inputButton1}
-              data-cy="send_Button"
-              type="submit"
-              sx={{ mt: "20px" }}
-            >
+      <Card
+        sx={{
+          minWidth: 200,
+          maxWidth: 545,
+          ml: "200px",
+          mt: "60px",
+          position: "relative",
+        }}
+      >
+        <CardContent>
+          <TextFieldController
+            control={control}
+            name="code"
+            label="MermaidJS"
+            variant="outlined"
+          />
+          <Box sx={{display:"flex",justifyContent: "flex-end", alignItems: "flex-end", mt: "20px"}}>
+            <Button variant="contained" data-cy="send_Button" type="submit">
               Send
             </Button>
             {commonCardVisible && (
               <Button
                 onClick={changeCardVisible}
                 variant="text"
-                className={styles.inputButton2}
                 data-cy="reset_Button"
-                sx={{ mt: "20px", ml: "360px" }}
+                sx={{ml: "10px"}}
               >
                 Reset
               </Button>
             )}
-          </CardContent>
-        </Card>
-      </div>
+          </Box>
+        </CardContent>
+      </Card>
     </>
   );
 };

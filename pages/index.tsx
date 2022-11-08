@@ -1,9 +1,10 @@
-import MermaidRenderer from "../components/MermaidRenderer";
-import React, { useState } from "react";
+import Grid from "@mui/material/Grid";
+import LogCard from "components/LogCard";
+import MermaidRenderer from "components/MermaidRenderer";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import InputForm from "../components/InputForm";
 import Navbar from "../components/Navbar";
-import styles from "../styles/styles.module.css";
 
 export interface IFormInput {
   code: string;
@@ -37,20 +38,27 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <Navbar />
-      <div className={styles.leftSide}>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <InputForm
-            control={control}
-            changeCardVisible={changeCardVisible}
-            commonCardVisible={cardVisible}
-          />
-        </form>
-      </div>
-      <div className={styles.rightSide}>
-        <>{cardVisible && <MermaidRenderer chart={code} />}</>
-      </div>
-    </div>
+      <Grid container columnSpacing={-20} rowSpacing={3}>
+        <Grid item xs={6}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <InputForm
+              control={control}
+              changeCardVisible={changeCardVisible}
+              commonCardVisible={cardVisible}
+            />
+          </form>
+        </Grid>
+        <Grid item xs={6}>
+          {cardVisible && (
+            <div>
+              <MermaidRenderer chart={code} />
+              <LogCard chart={code} />
+            </div>
+          )}
+        </Grid>
+      </Grid>
+    </>
   );
 }
